@@ -1,0 +1,10 @@
+server {
+listen 80;
+
+server_name static.kostromin.ru;
+
+location ~* .(jpg|jpeg|gif|png|ico|css|zip|rar|pdf)$ {
+root /var/www/static;
+error_page 404 = 404;
+}
+}

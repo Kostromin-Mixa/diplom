@@ -1,0 +1,36 @@
+image: docker:latest
+services:
+  - docker:dind
+stages:
+  - build
+  - deploy docker
+  - deploy kuber
+build:
+  stage: build
+  script:
+    - docker build -t $CI_REGISTRY/kostromin-mikhail/my-projeck/image:latest .
+  except:
+    - main
+build&deploy:
+  stage: deploy docker
+  script:
+    - docker login -u $CI_REGISTRY_USER -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - docker build -t $CI_REGISTRY/kostromin-mikhail/my-projeck/static:${CI_COMMIT_SHORT_SHA} .
+    - docker push $CI_REGISTRY/kostromin-mikhail/my-projeck/static:${CI_COMMIT_SHORT_SHA}
+  only:
+    - main
+deploy kuber:
+  image:
+    name: docker.io/bitnami/kubectl:latest
+    entrypoint: [""]
+  stage: deploy kuber
+  script:
+    - kubectl config set-cluster k8s --server="$KUBE_URL"
+    - kubectl config set clusters.k8s.certificate-authority-data ${CERTIFICATE_AUTHORITY_DATA}
+    - kubectl config set-credentials gitlab --token="${USER_TOKEN}"
+    - kubectl config set-context default --cluster=k8s --user=gitlab
+    - kubectl config use-context default
+    - sed -i "s/__version__/${CI_COMMIT_SHORT_SHA}/g" deployment.yaml
+    - kubectl apply -f deployment.yaml
+  only:
+    - tags

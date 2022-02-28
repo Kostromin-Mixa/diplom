@@ -43,6 +43,7 @@ $ kubectl get all -n monitoring
 5 Этап.   
  Установка и настройка CI/CD сделана в GitLab   
 [gitlab-ci.yml](https://github.com/Kostromin-Mixa/diplom/blob/main/gitlab-ci.yml)   
+[deployment.yaml](https://github.com/Kostromin-Mixa/diplom/blob/main/deployment.yaml)   
 - Автоматическая сборка docker образа при коммите в репозиторий с тестовым приложением.   
 ![2022-02-28_13-27-11](https://user-images.githubusercontent.com/78191008/155949668-bdcdf315-5f86-4a78-a027-a60ee01fecee.png)   
 

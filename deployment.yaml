@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+  name: static
+  namespace: default
+spec:
+  containers:
+  - image: registry.gitlab.com/kostromin-mikhail/my-projeck/static:__version__
+    name: static-image
+    imagePullPolicy: IfNotPresent
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true

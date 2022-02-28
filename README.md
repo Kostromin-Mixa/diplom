@@ -59,4 +59,3 @@ $ kubectl get all -n monitoring
 
 
 
-

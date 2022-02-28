@@ -4,8 +4,7 @@
 2. Запустить и сконфигурировать Kubernetes кластер.   
 3. Установить и настроить систему мониторинга.   
 4. Настроить и автоматизировать сборку тестового приложения с использованием Docker-контейнеров.   
-5. Настроить CI для автоматической сборки и тестирования.   
-6. Настроить CD для автоматического развёртывания приложения.   
+5. Настроить CI/CD для автоматической сборки и развёртывания приложения.   
 
 
 Этапы выполнения:   
@@ -23,13 +22,14 @@
 - Создание облачной инфраструктуры и Kubernetes кластер.      
 [main.tf](https://github.com/Kostromin-Mixa/diplom/blob/main/main.tf)   
 
+3 Этап.
 - Создание тестового приложения   
 [default.conf](https://github.com/Kostromin-Mixa/diplom/blob/main/default.conf)   
 
 - Подготовлен Dockerfile для создания образа приложения.
 [dockerfile](https://github.com/Kostromin-Mixa/diplom/blob/main/dockerfile)   
 
-3 Этап.
+4 Этап.
 - Подготовка cистемы мониторинга   
 $ helm repo add prometheus-community https://prometheus-community.github.io/helm-charts   
 $ ubectl create ns ьщтшещкштп   
@@ -40,7 +40,7 @@ $ kubectl get all -n monitoring
 
 ![Снимок экрана от 2022-02-28 12-57-07](https://user-images.githubusercontent.com/78191008/155948169-07d469ad-8896-4201-990a-27917a5a4ad9.png)
 
-4 Этап.   
+5 Этап.   
  Установка и настройка CI/CD сделана в GitLab   
 [gitlab-ci.yml](https://github.com/Kostromin-Mixa/diplom/blob/main/gitlab-ci.yml)   
 - Автоматическая сборка docker образа при коммите в репозиторий с тестовым приложением.   
